@@ -25,6 +25,7 @@ class LatteModule {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .client(okHttpClient)
             .baseUrl(environment.baseUrl)
             .build()
     }
