@@ -25,9 +25,32 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":gopaysdk")
 
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation supportDependencies.appCompact
+    implementation supportDependencies.design
+    implementation libraries.constraintLayout
+    implementation libraries.kotlin
+    implementation libraries.dagger
+    kapt libraries.daggerCompiler
+    implementation libraries.daggerAndroid
+    implementation libraries.daggerAndroidSupport
+    kapt libraries.daggerAndroidCompiler
+    kapt libraries.guava
+    compileOnly libraries.javaxAnnotation
+    implementation libraries.multidex
+    implementation libraries.okHttp
+    implementation libraries.okHttpLogging
+    implementation libraries.okHttpUrlConnection
+    implementation libraries.curlLoggerInterceptor
+    implementation libraries.retrofit
+    implementation libraries.retrofitGson
+    implementation libraries.retrofitRx
+    implementation libraries.rxAndroid
+    implementation libraries.rxJava
+    implementation libraries.gson
+    implementation libraries.chuck
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
