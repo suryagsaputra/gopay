@@ -1,4 +1,17 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+buildscript {
+    repositories {
+        maven { url 'http://artifactory-gojek.golabs.io/artifactory/gojek-jars' }
+    }
+}
+
+androidExtensions {
+    experimental = true
+}
 
 android {
     compileSdkVersion 28
@@ -12,23 +25,41 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+    lintOptions {
+        abortOnError false
     }
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def supportDependencies = rootProject.ext.supportDependencies
+    def librariesDependencies = rootProject.ext.libraries
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation supportDependencies.appCompact
+    implementation librariesDependencies.kotlin
+    implementation librariesDependencies.dagger
+    kapt librariesDependencies.daggerCompiler
+    implementation librariesDependencies.daggerAndroid
+    implementation librariesDependencies.daggerAndroidSupport
+    kapt librariesDependencies.daggerAndroidCompiler
+    compileOnly librariesDependencies.javaxAnnotation
+    implementation librariesDependencies.okHttp
+    implementation librariesDependencies.okHttpLogging
+    implementation librariesDependencies.okHttpUrlConnection
+    implementation librariesDependencies.curlLoggerInterceptor
+    implementation librariesDependencies.retrofit
+    implementation librariesDependencies.retrofitGson
+    implementation librariesDependencies.retrofitRx
+    implementation librariesDependencies.rxAndroid
+    implementation librariesDependencies.rxJava
+    implementation librariesDependencies.gson
+    implementation librariesDependencies.chuck
+    implementation(librariesDependencies.glideOkhttpIntegration) {
+        exclude group: 'glide-parent'
+    }
+}
+
+repositories {
+    mavenCentral()
 }
